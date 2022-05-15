@@ -1,0 +1,18 @@
+// CLASSES FOR BUTTONS.
+.dark-button {
+    @include width-and-height( 100%, auto );
+    @include display-flex;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 0;
+    background-color: $secondary;
+    text-align: center;
+    cursor: pointer;
+    font: normal normal bold 14px/normal Lato;
+    color: $main;
+    transition: background-color ease .3s;
+
+    &:hover {
+        background-color: $highlight;
+    }
+}

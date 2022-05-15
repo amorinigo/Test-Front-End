@@ -1,0 +1,55 @@
+{
+	"name": "amorinigo",
+	"version": "1.0.0",
+	"description": "This is a basic project with GULP",
+	"author": "Agustin Julian Morinigo",
+	"keywords": [
+		"Gulp",
+		"Babel",
+		"Js",
+		"ES6",
+		"SASS"
+	],
+	"devDependencies": {
+		"@babel/core": "^7.2.2",
+		"@babel/preset-env": "^7.2.3",
+		"babelify": "^10.0.0",
+		"browser-sync": "^2.26.3",
+		"browserify": "^16.2.3",
+		"browserify-shim": "^3.8.14",
+		"cssnano": "^5.0.16",
+		"gulp": "^4.0.0",
+		"gulp-autoprefixer": "^6.0.0",
+		"gulp-cache-bust": "^1.4.1",
+		"gulp-if": "^2.0.2",
+		"gulp-options": "^1.1.1",
+		"gulp-plumber": "^1.2.1",
+		"gulp-postcss": "^9.0.1",
+		"gulp-purgecss": "^4.1.3",
+		"gulp-rename": "^1.2.0",
+		"gulp-sass": "^4.0.2",
+		"gulp-sourcemaps": "^3.0.0",
+		"gulp-strip-debug": "^3.0.0",
+		"gulp-uglify": "^3.0.0",
+		"vinyl-buffer": "^1.0.0",
+		"vinyl-source-stream": "^2.0.0"
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env"
+		]
+	},
+	"browserify": {
+		"transform": [
+			"browserify-shim"
+		]
+	},
+	"browserify-shim": {
+		"jquery": "$"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"gulp-htmlmin": "^5.0.1",
+		"postcss": "^8.4.5"
+	}
+}

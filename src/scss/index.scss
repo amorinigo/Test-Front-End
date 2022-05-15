@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  height: 100vh;
+  user-select: none;
+  background-color: orange;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+
+  a {
+    text-decoration: none
+  }
+}
+
+@import './config/config';
+@import './common/common';
+@import './components/components';
+
+// SACAR ESTO DE ACÁ.
+.main {
+  padding-top: 66px;
+
+  @media ( min-width: $mdSize ) {
+    padding-top: 0;
+  }
+}

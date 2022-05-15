@@ -1,0 +1,276 @@
+.footer {
+    border-bottom: 7px solid $grey1;
+    
+    .newsletter {
+        background-color: $grey3;
+        padding: 12px 27px 26px 27px;
+
+        &__title {
+            margin-bottom: 17px;
+            font: normal normal bold 22px/24px Lato;
+            color: $grey5;
+
+            @media ( min-width: $mdSize ) {
+                margin-bottom: 15px;
+                text-align: center;
+            }
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            &-field {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                
+                .newsletter__form-input {
+                    width: 100%;
+                    background-color: $main;
+                    border-radius: 6px;
+                    padding: 16px 22px;
+                    font: normal normal bold 12px/14px Lato;
+                    color: $grey4;
+                    border: 0;
+                    outline: 0;
+    
+                    &::placeholder {
+                        font: normal normal bold 12px/14px Lato;
+                        color: $grey4;
+                    }
+    
+                    @media ( min-width: $mdSize ) {
+                        width: 280px;
+                    }
+                }
+
+                .newsletter__form-error {
+                    font: normal normal normal 13px/12px Nunito;
+                    color: $error;
+                    display: none;
+                }
+
+                &.is-error {
+                    .newsletter__form-input {
+                        // border: 1px solid $error;
+                    }
+
+                    .newsletter__form-error {
+                        display: inline-block;
+                    }
+                }
+            }
+
+            &-button {
+                height: 50px;
+
+                &.loading {
+                    pointer-events: none;
+                    cursor: default;
+                    opacity: .5;
+                    .text { display: none; }
+                    .spinner { display: flex; }
+                }
+
+                @media ( min-width: $mdSize ) {
+                    font: normal normal 700 14px/normal Lato;
+                    @include width-and-height( auto, 47px );
+                    padding: 0 40px;
+                }
+
+                .text {
+                    display: block;
+                }
+
+                .spinner {
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+
+                    &::after {
+                        margin-left: 10px;
+                        @include spinner(#FFF);
+                    }
+                }
+            }
+
+            @media ( min-width: $mdSize ) {
+                @include display-flex( flex-start, center );
+                gap: 8px;
+                width: 100%;
+            }
+        }
+
+        &__messages {
+            text-align: center;
+
+            .msg {
+                font: normal normal normal 13px/12px Nunito;
+                margin-top: 10px;
+                display: none;
+
+                &.is-error,
+                &.show {
+                    display: inline-block;
+                }
+            }
+
+            .email,
+            .error {
+                color: $error
+            }
+
+            .success {
+                color: $success;
+            }
+        }
+
+        @media ( min-width: $mdSize ) {
+            padding: 16px 27px 38px 27px;
+        }
+    }
+
+    .contact {
+        background-color: $secondary;
+        padding: 24px 27px 28px 27px;
+
+        &__grid {
+            .data {
+                &__title {
+                    font: normal normal bold 20px/27px Nunito;
+                    color: $main;
+                    padding-bottom: 18px;
+                    margin-bottom: 34px;
+                    position: relative;
+    
+                    &::before {
+                        display: block;
+                        content: '';
+                        @include position-top-left( absolute, 100%, 0 );
+                        @include width-and-height( 40px, 4px );
+                        background-color: $main;
+                    }
+                }
+    
+                &__items {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    text-align: center;
+    
+                    .data__item {
+                        font: normal normal normal 13px/12px Nunito;
+                        color: $main;
+                    }
+
+                    @media ( min-width: $mdSize ) {
+                        text-align: left;
+                    }
+                }
+            }
+    
+            .buttons {
+                @include display-flex( center, center, column );
+                margin: 45px 0 34px 0;
+                gap: 35px;
+    
+                .contact-button {
+                    @include display-flex;
+                    background-color: $main;
+                    border-radius: 5px;
+                    padding: 16px 20px;
+                    max-width: 264px;
+                    max-height: 50px;
+                    overflow: hidden;
+                    transition: background-color .3s ease;
+    
+                    &__icon {
+                        &.icon-headphones {
+                            margin-right: 22px;
+                            &::before { font-size: 22px; }
+                        }
+    
+                        &::before {
+                            transition: color .3s ease;
+                            font-size: 19px;
+                        }
+                    }
+    
+                    &__text {
+                        font: normal normal 600 12px/16px Nunito;
+                        color: $secondary;
+                        text-transform: uppercase;
+                        transition: color .3s ease;
+    
+                        &.email-text {
+                            padding: 0 46px;
+                        }
+                    }
+    
+                    &:hover {
+                        background-color: $highlight;
+    
+                        .contact-button__icon::before { 
+                            color: $main;
+                        }
+    
+                        .contact-button__text {
+                            color: $main;
+                        }
+                    }
+                }
+                
+                @media ( min-width: $mdSize ) {
+                    margin: 0;
+                }
+            }
+    
+            .copyright {
+                @include display-flex( center, space-between );
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+    
+                &__item {
+                    display: flex;
+                    flex-direction: column;
+                    
+                    .copyright__text {
+                        font: normal normal normal 11px/25px Nunito;
+                        color: $main;
+                    }
+    
+                    .copyright__icon {
+                        &::before {
+                            color: $main;
+                            transition: color .3s ease;
+                            font-size: 22px;
+                        }
+    
+                        &:hover::before { 
+                            color: $highlight;
+                        } 
+                    }
+                }
+    
+                @media ( min-width: $mdSize ) {
+                    width: auto;
+                    margin: 0;
+                    gap: 25px;
+                }
+            }
+    
+            @media ( min-width: $mdSize ) {
+                @include display-flex( center, space-between );
+                margin: 0 auto;
+                max-width: 1200px;
+            }
+        }
+    }
+    
+    @media ( min-width: $mdSize ) {
+        border-bottom: 10px solid $grey1;
+    }
+}

@@ -1,0 +1,58 @@
+@mixin display-flex($align-items: center, $justify-content: center, $flex-direction: row) {
+    display: flex;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    flex-direction: $flex-direction;
+}
+
+@mixin position-top-left($position: absolute, $top: 0, $left: 0) {
+    position: $position;
+    top: $top;
+    left: $left;
+}
+
+@mixin position-top-right($position: absolute, $top: 0, $right: 0) {
+    position: $position;
+    top: $top;
+    right: $right;
+}
+
+@mixin width-and-height($width: 100%, $height: 100%) {
+    width: $width;
+    height: $height;
+}
+
+@mixin shadow {
+    display: block;
+    position: fixed;
+    background: rgba(0,0,0,.6);
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: $zIndexShadow; // This variable is in the file '_variables.scss'.
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+
+@mixin shadow-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+@mixin spinner( $spinner-color: #FFF ) {
+    @include width-and-height( 11px, 11px );
+    display: inline-block;
+    content: '';
+    background: transparent;
+    border: 2px solid $spinner-color;
+    border-right: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin .4s linear infinite;
+
+    @keyframes spin {
+        to { transform: rotate( 360deg ); }
+    }
+}

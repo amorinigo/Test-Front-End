@@ -1,0 +1,24 @@
+// Breakpoints.
+$mdSize: 768px; // Tablets.
+$lgSize: 992px; // Small desktops.
+$xlSize: 1200px; // Large desktops.
+$xxlSize: 1400px; // Extra large desktops.
+
+// Colors.
+$main: #FFFFFF;
+$secondary: #000000;
+$highlight: #F8475F;
+$error: red;
+$success: green;
+$grey1: #C0C0C0;
+$grey2: #BFBFBF;
+$grey3: #F2F2F2;
+$grey4: #585858;
+$grey5: #333333;
+$grey6: #E6E8EA;
+$grey7: #7A7A7A;
+$grey8: #BDBDBD;
+
+// z-index.
+$zIndexShadow: 1000;
+$zIndexSidenav: $zIndexShadow + 100;

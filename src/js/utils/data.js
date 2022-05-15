@@ -1,0 +1,1 @@
+export const message = "Hi, I'm using ES6 modules";
