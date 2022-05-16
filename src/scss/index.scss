@@ -10,9 +10,9 @@ html {
 
 body {
   overflow-x: hidden;
-  height: 100vh;
+  height: 100%;
   user-select: none;
-  background-color: orange;
+  background-color: #FFF;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   display: grid;
@@ -28,9 +28,9 @@ body {
 @import './common/common';
 @import './components/components';
 
-// SACAR ESTO DE ACÁ.
 .main {
   padding-top: 66px;
+  overflow-x: hidden;
 
   @media ( min-width: $mdSize ) {
     padding-top: 0;

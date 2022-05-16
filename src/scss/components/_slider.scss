@@ -1,0 +1,138 @@
+.swiper {
+    width: 100%;
+    height: 255px;
+    background-color: #FFF;
+    overflow: hidden;
+
+    .swiper-slide {
+
+        overflow: hidden;
+
+        &__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        &.first {
+            display: flex;
+            
+            .swiper-slide__wave {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                background-image: url('https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=1280&w=1920');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba( 0,0,0,.6 );
+                }
+
+                @media ( min-width: $lgSize ) {
+                    background-size: 55% 100%;
+                    background-position: right;
+
+                    &::after {
+                        display: none;
+                    }
+                }
+
+                @media ( min-width: $xlSize ) {
+                    background-size: 55%;
+                }
+
+                .wave-svg {
+                    width: 100%;
+                    height: 100%;
+                    display: none;
+
+                    .wave-path {
+                        stroke: none;
+                        fill: $secondary;
+                    }
+
+                    @media ( min-width: $lgSize ) {
+                        display: block;
+                    }
+                }
+            }
+
+            .swiper-slide__text {
+                display: none;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                z-index: 5;
+                color: white;
+                padding-left: 26px;
+
+                &-first {
+                    font: normal normal bold 24px/30px Nunito;
+                    margin-bottom: 12px;
+                }
+
+                &-second {
+                    font: normal normal bold 32px/40px Nunito;
+                    max-width: 400px;
+                }
+
+                @media ( min-width: $mdSize ) {
+                    padding-left: 50px;
+                    
+                    &-first {
+                        font: normal normal bold 30px/30px Nunito;
+                        margin-bottom: 30px;
+                    }
+    
+                    &-second {
+                        font: normal normal 900 48px/54px Nunito;
+                        max-width: 505px;
+                    }
+                }
+            }
+
+            .swiper-slide__img {
+                width: 50%;
+                display: none;
+            }
+        }
+    }
+
+    .swiper-pagination {
+        bottom: 18px;
+        
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background-color: $grey8;
+            opacity: 1;
+
+            &.swiper-pagination-bullet-active {
+                background-color: $highlight;
+            }
+        }
+
+        @media ( min-width: $mdSize ) {
+            bottom: 37px;
+        }
+    }
+
+    @media ( min-width: $mdSize ) {
+        height: 430px;
+    }
+}
+  
