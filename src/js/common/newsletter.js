@@ -24,10 +24,10 @@ const Newsletter = () => {
 
             const name = formValues.name?.toLowerCase().trim();
             const email = formValues.email?.toLowerCase().trim();
-            const emailsSent = JSON.parse( localStorage.getItem( 'emailsSentNL' ) );
-
+            const emailsSent = JSON.parse( localStorage.getItem( 'emailsSentNL' ) ) || [];
             const isValidName = nameRegex.test( name );
             const isValidEmail = emailRegex.test( email );
+
             const isUniqueEmail = emailsSent && !emailsSent.includes( email ); // this value should consult the newsletter database.
             const isValidForm = isValidName && isValidEmail && isUniqueEmail;
             
@@ -76,13 +76,25 @@ const Newsletter = () => {
             const options = {
               method: 'POST',
               body: JSON.stringify( data ),
-              redirect: 'follow'
+              headers: {
+                  'Content-Type': 'application/json',
+                  'redirect': 'manual'
+              }
             };
             
             fetch( url , options )
                 .then( resp => resp.json() )
                 .then( ({ status }) => {
-                    status === 'error' ? resetForm( 'error' ) : resetForm( 'success' );
+
+                    if( status === 'error' ) {
+                        resetForm( 'error' );
+                    } else {
+                        resetForm( 'success' );
+                        const sentEmails = JSON.parse( localStorage.getItem('emailsSentNL') ) || [];
+                        sentEmails.push( data.email );
+                        localStorage.setItem( 'emailsSentNL', JSON.stringify(sentEmails) );
+                    }
+                    
                 } )
                 .catch( error => {
                     console.log(error);

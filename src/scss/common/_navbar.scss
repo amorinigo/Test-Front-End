@@ -3,6 +3,12 @@
     background-color: $main;
     position: relative;
     padding: 9px 27px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999999999;
+    
 
     .menu {
         &__icon {
@@ -150,6 +156,8 @@
         @include position-top-left( absolute, 100%, 0 );
         width: 100%;
         padding: 18px 27px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
 
         &__form {
             display: flex;
@@ -200,7 +208,7 @@
             width: 95%;
             height: auto;
             padding: 15px;
-            z-index: $zIndexSidenav;
+            z-index: 100;
 
             @media ( min-width: $mdSize ) {
                 left: 0;
@@ -250,30 +258,31 @@
                             height: 75px;
                             overflow: hidden;
                             margin-right: 12px;
-                            position: relative;
+                            // position: relative; //
+                            @include parentSpinner;
                             
                             &-img {
                                 width: 100%;
                                 height: 100%;
                                 object-fit: contain;
                                 font-size: 0;
-                                position: relative;
-                                z-index: 5;
+                                // position: relative; //
+                                // z-index: 5; //
                             }
 
-                            &::after {
-                                z-index: 2;
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                transform: translate( -50%, -50% );
-                                @include spinner(#000);
-                                animation: custom-spinner .4s linear infinite;
+                            // &::after { //
+                            //     z-index: 2;
+                            //     position: absolute;
+                            //     top: 50%;
+                            //     left: 50%;
+                            //     transform: translate( -50%, -50% );
+                            //     @include spinner(#000);
+                            //     animation: custom-spinner .4s linear infinite;
 
-                                @keyframes custom-spinner {
-                                    to { transform: translate( -50%, -50% ) rotate( 360deg ); }
-                                }
-                            }
+                            //     @keyframes custom-spinner {
+                            //         to { transform: translate( -50%, -50% ) rotate( 360deg ); }
+                            //     }
+                            // }
                         }
 
                         &__name {
@@ -303,6 +312,8 @@
             width: 100%;
             position: relative;
             inset: auto;
+            border-bottom: none;
+            max-width: 718px;
         }
     }
 
@@ -372,8 +383,8 @@
             position: fixed;            
             top: 0;
             right: -100%;
-            width: 70vw;
-            max-width: 400px;
+            width: 85vw;
+            max-width: 450px;
             height: 100%;
             background-color: #FFF;
             z-index: $zIndexSidenav;
@@ -422,9 +433,145 @@
 
             &-body {
                 // background-color: transparent;
-                background-color: orange;
+                // background-color: orange;
                 overflow-x: hidden;
                 overflow-y: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @include parentSpinner;
+
+                &::after {
+                    width: 25px;
+                    height: 25px;
+                    border-width: 3px;
+                }
+
+                .minicart__products {
+                    display: none;
+                    // background-color: red;
+                    width: 100%;
+                    height: 100%;
+
+                    .minicart__product {
+                        // background-color: peru;
+                        margin-bottom: 20px;
+                        &:last-child{ margin-bottom: 0; }
+                        display: flex;
+                        align-items: stretch;
+                        justify-content: flex-start;
+                        padding: 9px;
+                        background: #FFFFFF;
+                        border: 1px solid $grey1;
+                        border-radius: 12px;
+
+                        &-thumbnail {
+                            width: 90px;
+                            height: 90px;
+                            border-radius: 6px;
+                            overflow: hidden;
+                            flex-shrink: 0;
+                            margin-right: 12px;
+                            @include parentSpinner;
+
+                            .minicart__product-img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+
+                        &-info {
+                            // background-color: orange;
+                            width: 100%;
+                            // height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-end;
+                            justify-content: space-between;
+
+                            .info-top {
+                                display: flex;
+                                align-items: flex-start;
+                                justify-content: space-between;
+                                align-self: normal;
+
+                                .name {
+                                    display: flex;
+                                    flex-direction: column;
+                                    font: normal normal 600 12px/16px Nunito;
+                                    color: #000;
+
+                                    .units {
+                                        margin-top: 5px;
+                                        color: $grey7;
+                                    }
+                                }
+
+                                .icon-trash {
+                                    margin-left: 8px;
+                                    cursor: pointer;
+                                    &::before {
+                                        font-size: 20px;
+                                    }
+                                }
+                            }
+
+                            .info-prices {
+                                display: flex;
+                                flex-direction: column;
+                                text-align: right;
+
+                                .old-price {
+                                    font: normal normal normal 12px/16px Nunito;
+                                    text-decoration: line-through;
+                                    color: $grey7;
+                                }
+
+                                .best-price {
+                                    font: normal normal bold 14px/normal Nunito;
+                                    color: #000;
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                .minicart__msg {
+                    display: none;
+                    font: normal normal normal 15px/24px Nunito;
+                    color: #000;
+                    text-align: center;
+                }
+
+                &.show-products,
+                &.show-msg {
+                    &::after {
+                        display: none;
+                    }
+                }
+
+                &.show-products {
+                    
+                    .minicart__products {
+                        display: block;
+                    }
+    
+                    .minicart__msg {
+                        display: none;
+                    }
+                }
+
+                &.show-msg {
+                    .minicart__products {
+                        display: none;
+                    }
+    
+                    .minicart__msg {
+                        display: block;
+                    }
+                }
             }
 
             &-footer {
@@ -454,9 +601,12 @@
     @media ( min-width: $mdSize ) {
         justify-content: center;
         padding: 23px 6%;
+        width: 100%;
+        margin: 0 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     }
 
     @media ( min-width: $xxlSize ) {
-        padding: 23px 361px 23px 341px;
+        padding: 23px 0;
     }
 }

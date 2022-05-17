@@ -10,3 +10,15 @@ export const resetText = text => {
 export const toCapitalize = text => {
     return text.trim().toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
 }
+
+export const toBrReal = number => {
+
+    number = Number(number) / 100;
+    
+    return Number(number).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: 'BRL',
+        minimumFractionDigits: 2
+    });
+
+}

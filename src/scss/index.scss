@@ -27,12 +27,3 @@ body {
 @import './config/config';
 @import './common/common';
 @import './components/components';
-
-.main {
-  padding-top: 66px;
-  overflow-x: hidden;
-
-  @media ( min-width: $mdSize ) {
-    padding-top: 0;
-  }
-}
