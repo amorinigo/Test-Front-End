@@ -1,4 +1,4 @@
-import { resetText, toCapitalize } from "../utils/helpers";
+import { resetText, toCapitalize } from "../../utils/helpers";
 
 const Searcher = () => {
     

@@ -1,4 +1,4 @@
-import { updateMinicart } from "../common/minicart";
+import { updateMinicart } from "../common/navbar/Minicart";
 import { resetText, toCapitalize, toBrReal } from "../utils/helpers";
 
 const Products = () => {

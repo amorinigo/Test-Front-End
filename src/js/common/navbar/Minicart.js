@@ -1,4 +1,4 @@
-import { resetText, toCapitalize, toBrReal } from "../utils/helpers";
+import { resetText, toCapitalize, toBrReal } from "../../utils/helpers";
 
 const Minicart = () => {
     updateMinicart();

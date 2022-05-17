@@ -1,4 +1,4 @@
-import Newsletter from "./newsletter";
+import Newsletter from "./Newsletter";
 
 const Footer = () => {
     Newsletter();

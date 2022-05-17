@@ -1,4 +1,4 @@
-import { emailRegex, nameRegex } from "../utils/helpers";
+import { emailRegex, nameRegex } from "../../utils/helpers";
 
 const Newsletter = () => {
 
