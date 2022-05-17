@@ -1,4 +1,4 @@
-import { resetText, toCapitalize } from "../../utils/helpers";
+import { resetText, toCapitalize, getProducts, getProductsWithName } from "../../utils/helpers";
 
 const Searcher = () => {
     
@@ -26,15 +26,14 @@ const Searcher = () => {
                 return;
             }
 
-            fetch( 'https://corebiz-test.herokuapp.com/api/v1/products' )
-                .then( resp => resp.json() )     
+            getProducts()
                 .then( products => showResults( products, term ) )
                 .catch( err => showResults( [] ) );
         }
 
         const showResults = ( products, term = '' ) => {
 
-            const filteredProducts = products.filter( ({productName}) => resetText(productName).includes( term ) );
+            const filteredProducts = getProductsWithName( products, term );
             
             if( filteredProducts.length > 0 ) {
                 createNewResults( filteredProducts );
@@ -70,19 +69,19 @@ const Searcher = () => {
         const createNewResults = products => {
 
             const resultsCtn = document.querySelector( '.searcher__modal-results .modal-results__products' );
-            resultsCtn.innerHTML = ''; // Para quitar los productos que estén cargados actualemente.
+            resultsCtn.innerHTML = ''; // To remove products that are currently loaded.
 
             products.forEach( ({ imageUrl, productName }) => {
                 
-                const name = toCapitalize(productName);
+                const name = toCapitalize( productName );
                 
                 resultsCtn.innerHTML += `
                     <a class="product" href="#">
                         <div class="product__thumbnail">
-                            <img src="${imageUrl}" alt="${name}" class="product__thumbnail-img" />
+                            <img src="${ imageUrl }" alt="${ name }" class="product__thumbnail-img" />
                         </div>
 
-                        <span class="product__name">${name}</span>
+                        <span class="product__name">${ name }</span>
                     </a>
                 `;
                 

@@ -6,6 +6,7 @@ const Newsletter = () => {
         
         const form = document.querySelector( '.footer .newsletter .newsletter__form' );
         const formButton = form.querySelector( 'button[type="submit"]' );
+
         form.addEventListener( 'submit', e => evaluateForm(e) );
 
         const evaluateForm = event => {
@@ -90,16 +91,11 @@ const Newsletter = () => {
                         resetForm( 'error' );
                     } else {
                         resetForm( 'success' );
-                        const sentEmails = JSON.parse( localStorage.getItem('emailsSentNL') ) || [];
-                        sentEmails.push( data.email );
-                        localStorage.setItem( 'emailsSentNL', JSON.stringify(sentEmails) );
+                        saveNewEmail( data.email );
                     }
                     
                 } )
-                .catch( error => {
-                    console.log(error);
-                    resetForm( 'error' );
-                } );
+                .catch( error => resetForm( 'error' ) );
         }
 
         const resetForm = msgType => {
@@ -118,6 +114,12 @@ const Newsletter = () => {
             
             disabledForm( false );
             form.reset();
+        }
+
+        const saveNewEmail = email => {
+            const sentEmails = JSON.parse( localStorage.getItem('emailsSentNL') ) || [];
+            sentEmails.push( email );
+            localStorage.setItem( 'emailsSentNL', JSON.stringify(sentEmails) );
         }
         
     }

@@ -1,9 +1,9 @@
 import Navbar from './common/navbar/Navbar';
 import Footer from './common/footer/Footer';
-import Slider from './components/Slider';
-import Products from './components/Products';
+import ImagesSlider from './components/ImagesSlider';
+import ProductsSlider from './components/ProductsSlider';
 
 Navbar();
-Slider();
-Products();
+ImagesSlider();
+ProductsSlider();
 Footer();

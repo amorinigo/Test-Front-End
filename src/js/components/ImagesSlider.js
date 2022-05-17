@@ -1,4 +1,4 @@
-const Slider = () => {
+const ImagesSlider = () => {
 
     const swiper = new Swiper('.swiper.main-slider', {
         loop: true,
@@ -10,4 +10,4 @@ const Slider = () => {
 
 };
 
-export default Slider;
+export default ImagesSlider;

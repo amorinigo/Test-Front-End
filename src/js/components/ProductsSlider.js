@@ -1,48 +1,43 @@
 import { updateMinicart } from "../common/navbar/Minicart";
-import { resetText, toCapitalize, toBrReal } from "../utils/helpers";
+import { resetText, toCapitalize, toBrReal, getProducts, getProductById, getProductsWithout } from "../utils/helpers";
 
-const Products = () => {
+const ProductsSlider = () => {
 
-    const createCarrusel = () => {
+    const createProductsSlider = () => {
 
         const sliderCtn = document.querySelector( '.products-slider__swiper .swiper-wrapper' );
-        const url = 'https://corebiz-test.herokuapp.com/api/v1/products';
 
-        fetch( url )
-            .then( resp => resp.json() )
+        getProducts()
             .then( products => {
 
-                // console.log( products );
-                
                 products.forEach( product => {
+
+                    const { imageUrl, productName, stars, listPrice, price, installments, productId } = product;
 
                     sliderCtn.innerHTML += `
                         <div class="swiper-slide">
                             <div class="card">
                                 <div class="card__top">
                                     <a class="card__thumbnail" href="#">
-                                        <img src="${ product.imageUrl }" class="card__img" alt="${ toCapitalize(product.productName) }" />
-
-                                        ${
-                                            product.listPrice ? '<span class="discount">Off</span>' : ''
-                                        }
+                                        <img src="${ imageUrl }" class="card__img" alt="${ toCapitalize(productName) }" />
+                                        ${ listPrice ? '<span class="discount">Off</span>' : '' }
                                     </a>
 
                                     <div class="card__content">
-                                        <h6 class="card__product-name">${ resetText(product.productName) }</h6>
-                                        <span class="card__product-stars stars-${ product.stars }"></span>
+                                        <h6 class="card__product-name">${ resetText(productName) }</h6>
+                                        <span class="card__product-stars stars-${ stars }"></span>
                                         <div class="prices">
                                             ${
-                                                product.listPrice ?
-                                                `<span class="old-price">de ${ toBrReal(product.listPrice).replace('R', '') }</span>`: ''
+                                                listPrice ?
+                                                `<span class="old-price">de ${ toBrReal(listPrice).replace('R', '') }</span>`: ''
                                             }
-                                            <span class="final-price">por ${ toBrReal(product.price).replace('R', '') }</span>
+                                            <span class="final-price">por ${ toBrReal(price).replace('R', '') }</span>
                                         </div>
                                         ${
-                                            product.installments.length > 0 ? 
+                                            installments.length > 0 ? 
                                             `
                                             <span class="installments">
-                                                ou em ${product.installments[0].quantity}x de ${toBrReal(product.installments[0].value)}
+                                                ou em ${installments[0].quantity}x de ${toBrReal(installments[0].value)}
                                             </span>
                                             ` : ''
                                         }
@@ -58,7 +53,6 @@ const Products = () => {
                     
                 } );
 
-                // ESTA FUNCIÓN LA EJECUTO LUEGO DE INSERTAR TODOS LOS PRODUCTOS DE LA API.
                 const swiper = new Swiper('.swiper.products-slider__swiper', {
                     pagination: {
                         el: '.products-swiper-pagination',
@@ -92,48 +86,60 @@ const Products = () => {
 
     }
 
-    try { createCarrusel(); } catch (error) { console.log( error ); }
+    try { createProductsSlider(); } catch (error) { console.log( error ); }
 
     const handleBuyButtons = () => {
 
         const buyButtons = Array.from( document.querySelectorAll( '.card span.card__button' ) );
 
         buyButtons.forEach( button => {
-            button.addEventListener( 'click', e => runCompra(e) );
+            button.addEventListener( 'click', e => runPurchase(e) );
         } );
 
-        const runCompra = e => {
-            e.target.parentElement.classList.add( 'loading' );
-            const productId = e.target.dataset.productid;
-            const url = 'https://corebiz-test.herokuapp.com/api/v1/products';
-
-            fetch( url )
-                .then( resp => resp.json() )
-                .then( products => {
-                    const product = products.find( product => String( product.productId ) === String( productId ) );
-                    addProduct(product);
-                    updateMinicart();
-                    e.target.parentElement.classList.remove( 'loading' );
-                } );
+        const addSpinner = ( element, add ) => {
+            ( add )
+                ? element.classList.add( 'loading' )
+                : element.classList.remove( 'loading' );
         }
 
-        const addProduct = product => { 
+        const runPurchase = e => {
+
+            const card = e.target.parentElement;
+            const productId = e.target.dataset.productid;
+            addSpinner( card, true );
+
+            getProducts()
+                .then( products => {
+                    const product = getProductById( products, productId );
+                    addProduct(product);
+                    updateMinicart();
+                    addSpinner( card, false );
+                } )
+                .catch( err => {
+                    alert('Ha ocurrido un error.');
+                    addSpinner( card, false );
+                } );
+
+        }
+
+        const addProduct = product => {
 
             const { imageUrl, price, listPrice, productId, productName } = product;
 
             let purchasedProducts = JSON.parse( localStorage.getItem( 'purchasedProducts' ) ) || [];
-            const productInStorage = purchasedProducts?.find( product => String( product.productId ) === String( productId ) );
-            purchasedProducts = purchasedProducts.filter( product => String( product.productId ) !== String( productId ) );
+            const productInStorage = getProductById( purchasedProducts, productId );
+            purchasedProducts = getProductsWithout( purchasedProducts, productId );
             
-            purchasedProducts.push({
+            const newProduct = {
                 imageUrl,
                 price,
                 listPrice,
                 productId,
                 productName,
                 quantity: productInStorage ? (Number( productInStorage?.quantity ) + 1) : 1
-            });
-
+            };
+            
+            purchasedProducts.push( newProduct );
             localStorage.setItem( 'purchasedProducts', JSON.stringify(purchasedProducts) );
 
         }
@@ -142,4 +148,4 @@ const Products = () => {
 
 };
 
-export default Products;
+export default ProductsSlider;
