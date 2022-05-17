@@ -8,13 +8,10 @@
         position: relative;
 
         &:after {
-            position: absolute;
-            display: block;
+            @include position-top-left( absolute, 100%, 0 );
+            @include width-and-height( 45px, 5px );
             content: '';
-            left: 0;
-            top: 100%;
-            width: 45px;
-            height: 5px;
+            display: block;
             background-color: $grey1;
         }
         
@@ -30,13 +27,12 @@
         position: relative;
         padding-bottom: 40px;
         min-height: 250px;
-        @include parentSpinner;
+        @include withSpinner;
 
         &::after {
-            z-index: -1;
-            width: 30px;
-            height: 30px;
+            @include width-and-height( 30px, 30px );
             border-width: 4px;
+            z-index: -1;
         }
 
         &.finished {
@@ -54,34 +50,28 @@
             height: auto;
 
             .card {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                @include width-and-height;
+                @include display-flex( stretch, space-between, column );
                 text-align: center;
                 background-color: #FFF;
                 transition: background-color .3s ease;
                 cursor: pointer;
 
                 &.loading {
-                    @include parentSpinner;
+                    @include withSpinner;
+
                     &::after {
-                        z-index: 20;
-                        width: 20px;
-                        height: 20px;
+                        @include width-and-height( 20px, 20px );
                         border-width: 3px;
+                        z-index: 20;
                     }
 
                     &::before {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
+                        @include position-top-left( absolute, 0, 0 );
+                        @include width-and-height;
+                        content: '';
                         display: block;
                         z-index: 15;
-                        content: '';
                         background-color: white;
                         opacity: .7;
                     }
@@ -96,15 +86,13 @@
                 }
 
                 &__top {
-
                     .card__thumbnail {
                         display: block;
-                        width: 100%;
-                        height: 200px;
+                        @include width-and-height( 100%, 200px );
                         overflow: hidden;
                         background-color: #FFF;
                         transition: transform .3s ease;
-                        @include parentSpinner;
+                        @include withSpinner;
                         
                         .card__img {
                             max-width: 100%;
@@ -119,19 +107,15 @@
                         }
 
                         .discount {
-                            position: absolute;
-                            top: 0;
-                            right: 0;
+                            @include position-top-right( absolute, 0, 0 );
+                            @include width-and-height( 81px, 72px );
                             background-color: $highlight;
                             z-index: 10;
                             font: normal normal 900 16px/22px Nunito;
                             color: #FFF;
                             text-transform: uppercase;
-                            width: 81px;
-                            height: 72px;
                             clip-path: polygon(100% 0, 0 0, 100% 100%);
-                            padding-top: 15px;
-                            padding-left: 36px;
+                            padding: 15px 0 0 36px;
                         }
                     }
 
@@ -173,7 +157,6 @@
                             color: $grey7;
                         }
                     }
-                    
                 }
 
                 &__button {
@@ -210,17 +193,14 @@
         }
 
         .products-swiper-pagination {
-            position: absolute;
-            top: auto;
-            left: 50%;
+            @include position-top-left( absolute, auto, 50% );
             bottom: 0;
             transform: translateX(-50%);
             width: auto;
             z-index: 100;
 
             .swiper-pagination-bullet {
-                width: 9px;
-                height: 9px;
+                @include width-and-height( 9px, 9px );
                 background-color: $grey8;
                 opacity: 1;
 

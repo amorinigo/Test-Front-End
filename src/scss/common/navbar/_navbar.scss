@@ -1,0 +1,74 @@
+.navbar {
+    @include display-flex( center, space-between );
+    background-color: $main;
+    position: relative;
+    padding: 9px 27px;
+    @include position-top-left( fixed, 0, 0 );
+    width: 100%;
+    z-index: $zIndexNavbar;
+
+    .logo {
+        &__icon {
+            display: inline-block;
+            @include width-and-height;
+
+            &::before { 
+                font-size: 34px;
+                transition: color .3s ease;
+            }
+
+            &:hover::before {
+                color: $highlight;
+            }
+        }
+
+        @media ( min-width: $mdSize ) {
+            margin: 0 132px 0 20px;
+            flex-shrink: 0;
+        }
+        
+        @media ( min-width: $xxlSize ) {
+            margin-left: 30px;
+        }
+    }
+
+    .user {
+        margin: 0 44px;
+        flex-shrink: 0;
+        display: none;
+
+        &__link {
+            @include display-flex;
+
+            .user__icon {
+                margin-right: 6px;
+                &::before { font-size: 16px; }
+            }
+
+            .user__text {
+                font: normal normal normal 13px/18px Nunito;
+                color: $grey7;
+            }
+        }
+
+        @media ( min-width: $mdSize ) {
+            display: inline-block;
+        }
+    }
+
+    @media ( min-width: $mdSize ) {
+        justify-content: center;
+        padding: 23px 6%;
+        width: 100%;
+        margin: 0 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
+    @media ( min-width: $xxlSize ) {
+        padding: 23px 0;
+    }
+}
+
+@import './menu';
+@import './searcher';
+@import './minicart';

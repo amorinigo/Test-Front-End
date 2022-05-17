@@ -1,0 +1,221 @@
+.navbar .minicart {
+    &__icon {
+        cursor: pointer;
+        @include display-flex( center, space-between );
+        gap: 8px;
+
+        .icon-mini-cart {
+            display: inline-block;
+            @include width-and-height( auto, 100% );
+            &::before { font-size: 19px; }
+        }
+
+        .minicart__quantity {
+            @include display-flex;
+            @include width-and-height( 18px, 18px );
+            border-radius: 50%;
+            background-color: $highlight;
+            font: normal normal bold 10px/26px Nunito;
+            color: $main;
+        }
+    }
+
+    &__input {
+        display: none;
+
+        &:checked + .minicart__shadow {
+            @include shadow-active;
+
+            & + .minicart__sidenav {
+                right: 0;
+            }
+        }
+    }
+
+    &__shadow {
+        @include shadow;
+    }
+
+    &__sidenav {
+        @include position-top-right( fixed, 0, -100% );
+        @include width-and-height( 85vw, 100% );
+        max-width: 450px;
+        background-color: #FFF;
+        z-index: $zIndexSidenav;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        gap: 24px;
+        padding: 24px;
+        transition: right .3s ease;
+
+        &-head {
+            @include display-flex( center, space-between );
+            padding-bottom: 9px;
+            border-bottom: 2px solid $grey7;
+
+            .sidenav-title {
+                @include display-flex;
+                
+                &__text {
+                    font: normal normal normal 13px/18px Nunito;
+                    color: $grey7;
+                }
+
+                &__icon {
+                    margin-right: 10px;
+                }
+            }
+            
+            .sidenav-label {
+                @include display-flex;
+                cursor: pointer;
+                
+                &__text {
+                    font: normal normal normal 13px/18px Nunito;
+                    color: $grey7;
+                }
+
+                &__icon {
+                    margin-left: 10px;
+                    &::before { font-size: 12px; } 
+                }
+            }
+        }
+
+        &-body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            @include display-flex;
+            @include withSpinner;
+
+            &::after {
+                @include width-and-height( 25px, 25px );
+                border-width: 3px;
+            }
+
+            .minicart__products {
+                display: none;
+                @include width-and-height;
+
+                .minicart__product {
+                    @include display-flex( stretch, flex-start );
+                    background-color: #FFFFFF;
+                    padding: 9px;
+                    margin-bottom: 20px;
+                    border: 1px solid $grey1;
+                    border-radius: 12px;
+
+                    &:last-child{ margin-bottom: 0; }
+
+                    &-thumbnail {
+                        @include width-and-height( 90px, 90px );
+                        border-radius: 6px;
+                        overflow: hidden;
+                        flex-shrink: 0;
+                        margin-right: 12px;
+                        @include withSpinner;
+
+                        .minicart__product-img {
+                            @include width-and-height;
+                            object-fit: cover;
+                        }
+                    }
+
+                    &-info {
+                        width: 100%;
+                        @include display-flex( flex-end, space-between, column );
+
+                        .info-top {
+                            @include display-flex( flex-start, space-between );
+                            align-self: normal;
+
+                            .name {
+                                display: flex;
+                                flex-direction: column;
+                                font: normal normal 600 12px/16px Nunito;
+                                color: #000;
+
+                                .units {
+                                    margin-top: 5px;
+                                    color: $grey7;
+                                }
+                            }
+
+                            .icon-trash {
+                                margin-left: 8px;
+                                cursor: pointer;
+
+                                &::before {
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+
+                        .info-prices {
+                            display: flex;
+                            flex-direction: column;
+                            text-align: right;
+
+                            .old-price {
+                                font: normal normal normal 12px/16px Nunito;
+                                text-decoration: line-through;
+                                color: $grey7;
+                            }
+
+                            .best-price {
+                                font: normal normal bold 14px/normal Nunito;
+                                color: #000;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .minicart__msg {
+                display: none;
+                font: normal normal normal 15px/24px Nunito;
+                color: #000;
+                text-align: center;
+            }
+
+            &.show-products,
+            &.show-msg {
+                &::after {
+                    display: none;
+                }
+            }
+
+            &.show-products {
+                .minicart__products { display: block; }
+                .minicart__msg { display: none; }
+            }
+
+            &.show-msg {
+                .minicart__products { display: none; }
+                .minicart__msg { display: block; }
+            }
+        }
+
+        &-footer {
+            .sidenav-footer__subtotal,
+            .sidenav-footer__total {
+                @include display-flex( center, space-between );
+                font: normal normal bold 15px/24px Nunito;
+                color: $grey7;
+                border-top: 1px solid $grey7;
+                padding: 18px 0;
+            }
+
+            .sidenav-footer__total {
+                color: #000;
+            }
+
+            .sidenav-footer__button {
+                padding: 15px 0;
+                margin-top: 12px;
+                font-size: 15px;
+            }
+        }
+    }
+}

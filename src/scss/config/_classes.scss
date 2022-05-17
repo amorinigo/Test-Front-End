@@ -16,45 +16,13 @@
     }
 }
 
-.stars-1,
-.stars-2,
-.stars-3,
-.stars-4,
-.stars-5 {
+[class*="stars-"] {
     font-family: 'corebiz-icons';
-
-    &::before {
-        color: $highlight;
-    }
-
+    &::before { color: $highlight; }
 }
 
-.stars-1 {
-    &::before {
-        content: '\e802 \00a0 \e801 \00a0 \e801 \00a0 \e801 \00a0 \e801';
-    }
-}
-
-.stars-2 {
-    &::before {
-        content: '\e802 \00a0 \e802 \00a0 \e801 \00a0 \e801 \00a0 \e801';
-    }
-}
-
-.stars-3 {
-    &::before {
-        content: '\e802 \00a0 \e802 \00a0 \e802 \00a0 \e801 \00a0 \e801';
-    }
-}
-
-.stars-4 {
-    &::before {
-        content: '\e802 \00a0 \e802 \00a0 \e802 \00a0 \e802 \00a0 \e801';
-    }
-}
-
-.stars-5 {
-    &::before {
-        content: '\e802 \00a0 \e802 \00a0 \e802 \00a0 \e802 \00a0 \e802';
-    }
-}
+.stars-1::before { content: '\e802 \00a0 \e801 \00a0 \e801 \00a0 \e801 \00a0 \e801'; }
+.stars-2::before { content: '\e802 \00a0 \e802 \00a0 \e801 \00a0 \e801 \00a0 \e801'; }
+.stars-3::before { content: '\e802 \00a0 \e802 \00a0 \e802 \00a0 \e801 \00a0 \e801'; }
+.stars-4::before { content: '\e802 \00a0 \e802 \00a0 \e802 \00a0 \e802 \00a0 \e801'; }
+.stars-5::before { content: '\e802 \00a0 \e802 \00a0 \e802 \00a0 \e802 \00a0 \e802'; }

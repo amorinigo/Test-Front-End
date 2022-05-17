@@ -1,11 +1,11 @@
-@import './navbar';
-@import './footer';
+@import './navbar/navbar';
+@import './footer/footer';
 
 .main {
-    padding-top: calc(66px + 56px);
-    overflow-x: hidden;
-  
-    @media ( min-width: $mdSize ) {
-      padding-top: 84px;
-    }
+  padding-top: calc(66px + 56px);
+  overflow-x: hidden;
+
+  @media ( min-width: $mdSize ) {
+    padding-top: 84px;
   }
+}

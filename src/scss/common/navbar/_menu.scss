@@ -1,0 +1,102 @@
+.navbar .menu {
+    &__icon {
+        display: inline-block;
+        @include width-and-height;
+        cursor: pointer;
+        &:before { font-size: 18px; }
+    }
+
+    &__content {
+        @include shadow;
+
+        .menu__sidenav {
+            @include position-top-left( fixed, 0, -100% );
+            @include width-and-height( 70vw, 100% );
+            @include display-flex( center, space-between, column );
+            z-index: $zIndexSidenav;
+            background-color: #FFF;
+            max-width: 400px;
+            padding: 24px;
+            transition: left .3s ease;
+
+            &-icon {
+                align-self: flex-end;
+                cursor: pointer;
+
+                &::before {
+                    color: #000;    
+                    font-size: 20px;
+                }
+            }
+
+            &-items {
+                @include display-flex( center, center, column );
+                gap: 60px;
+                width: 100%;
+                list-style: none;
+
+                .menu__item {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+
+                    .menu__link {
+                        font: normal normal 900 22px/24px Lato;
+                        text-transform: uppercase;
+                        color: $grey5;
+                        position: relative;
+                        transition: color .3s ease;
+
+                        &::before {
+                            @include position-top-left( absolute, 100%, 0 );
+                            @include width-and-height( 0, 3px );
+                            content: '';
+                            display: block;
+                            background-color: $highlight;
+                            transition: width .2s ease-in-out;
+                        }
+
+                        &:hover {
+                            &::before {
+                                width: 100%;
+                            }
+                        }
+
+                        @media ( min-width: $mdSize ) {
+                            font-size: 28px;
+                        }
+                    }
+
+                    &:first-child .menu__link {
+                        color: $highlight;
+                    }
+                }
+            }
+
+            &-user {
+                @include display-flex;
+                font: normal normal normal 13px/18px Nunito;
+                color: $grey7;
+
+                .icon-user {
+                    margin-right: 15px;
+                    
+                    &::before {
+                        color: #000;    
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.active {
+        .menu__content {
+            @include shadow-active;
+
+            .menu__sidenav {
+                left: 0;
+            }
+        }
+    }
+}
