@@ -30,7 +30,7 @@ export const updateMinicart = () => {
                                 <span>${ productName }</span>
                                 <span class="units">${ quantity } U.</span>
                             </p>
-                            <i class="icon-trash" data-productid="${ productId }"></i>
+                            <i class="icon-trash" style="display: none;" data-productid="${ productId }"></i>
                         </div>
 
                         <span class="info-prices">
